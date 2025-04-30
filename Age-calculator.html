@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google AdSense Script (Replace with your own AdSense code) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+     crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-5xl px-4">
+    <!-- Banner Ad (Top) -->
+    <div class="w-full max-w-[728px] mx-auto mb-6">
+      <div class="bg-gray-300 h-20 flex items-center justify-center text-gray-600">
+        <!-- Replace with actual AdSense ad code -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-app-pub-3019985057781583~2627708897"
+             data-ad-slot="ca-app-pub-3019985057781583/1051813478"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <!-- Placeholder for testing -->
+        <span class="hidden">Banner Ad (728x90)</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-6">
+      <!-- Calculator -->
+      <div class="bg-white p-8 rounded-lg shadow-lg w-full md:w-2/3">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Age Calculator</h1>
+        
+        <div class="mb-4">
+          <label for="birthdate" class="block text-sm font-medium text-gray-700">Enter Your Birth Date</label>
+          <input type="date" id="birthdate" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" max="2025-04-30">
+        </div>
+        
+        <button onclick="calculateAge()" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-200">Calculate Age</button>
+        
+        <div id="result" class="mt-6 text-center text-gray-800"></div>
+        <div id="error" class="mt-2 text-center text-red-600"></div>
+      </div>
+
+      <!-- Sidebar Ad (Right or Bottom on Mobile) -->
+      <div class="w-full md:w-1/3">
+        <div class="bg-gray-300 h-64 flex items-center justify-center text-gray-600">
+          <!-- Replace with actual AdSense ad code -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-app-pub-3019985057781583~2627708897"
+               data-ad-slot="ca-app-pub-3019985057781583/4878784948"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          <!-- Placeholder for testing -->
+          <span class="hidden">Sidebar Ad (300x250 or 300x600)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthdateInput = document.getElementById('birthdate').value;
+      const resultDiv = document.getElementById('result');
+      const errorDiv = document.getElementById('error');
+      
+      resultDiv.innerHTML = '';
+      errorDiv.innerHTML = '';
+      
+      if (!birthdateInput) {
+        errorDiv.innerHTML = 'Please enter a valid birth date.';
+        return;
+      }
+      
+      const birthDate = new Date(birthdateInput);
+      const today = new Date();
+      
+      if (birthDate > today) {
+        errorDiv.innerHTML = 'Birth date cannot be in the future.';
+        return;
+      }
+      
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+      
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      
+      let resultText = '';
+      if (years > 0) resultText += `${years} year${years === 1 ? '' : 's'}`;
+      if (months > 0) resultText += `${resultText ? ', ' : ''}${months} month${months === 1 ? '' : 's'}`;
+      if (days > 0) resultText += `${resultText ? ', ' : ''}${days} day${days === 1 ? '' : 's'}`;
+      
+      if (!years && !months && !days) {
+        resultText = 'You were born today!';
+      }
+      
+      resultDiv.innerHTML = `You are ${resultText} old.`;
+    }
+  </script>
+</body>
+</html>
